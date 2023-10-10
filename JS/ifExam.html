@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>어서와요 많이 기다렸다구요</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      function game369(num) {
+        if (num % 9 == 0) {
+          console.log("박수x2");
+        } else if (num % 3 == 0) {
+          console.log("박수");
+        } else {
+          console.log("통과");
+        }
+      }
+      game369(6);
+      game369(9);
+      game369(11);
+
+      function 합격했냐(score1, score2) {
+        if (typeof score1 != "number" || typeof score2 != "number") {
+          //   alert("엄마가 먹을것으로 장난치지 말랬지.");
+          console.log("엄마가 먹을것으로 장난치지 말랬지.");
+        } else if (score1 < 40 || score2 < 40) {
+          console.log("불합격");
+        } else if (score1 + score2 >= 120) {
+          console.log("합격");
+        } else {
+          console.log("불합격");
+        }
+      }
+      합격했냐(70, 70);
+      합격했냐(30, 100);
+      합격했냐(50, 50);
+      합격했냐("문자열넣을껀데?", 50);
+
+      function real369(num) {
+        const strNum = num.toString();
+        const lastNum = strNum.slice(-1, strNum.length);
+        if (lastNum == 3 || lastNum == 6 || lastNum == 9) {
+          console.log("박수");
+        } else {
+          console.log("통과");
+        }
+      }
+      real369(1241256);
+      real369(124125);
+      real369(12412);
+      real369(1243);
+    </script>
+  </body>
+</html>
