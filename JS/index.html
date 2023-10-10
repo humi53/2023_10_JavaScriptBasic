@@ -4,15 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>어서와요 많이 기다렸다구요.</title>
+    <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <h1 id="hello">안녕하세요</h1>
-    <h1 id="hi">JS 초보에요</h1>
+    <div class="alert-box" id="alert">
+      알림창임
+      <button onclick="document.getElementById('alert').style.display = 'none'">
+        닫기
+      </button>
+    </div>
+    <button onclick="document.getElementById('alert').style.display = 'block'">
+      버튼
+    </button>
+
     <script>
-      const doc_hello = document.getElementById("hello");
-      document.getElementById("hello").innerHTML = "안녕";
-      document.getElementById("hi").innerHTML = "JS 고수에요";
-      doc_hello.style.fontSize = "16px";
+      //   const alert_box = document.getElementById("alert");
+      //   alert_box.style.display = "block";
     </script>
   </body>
 </html>
