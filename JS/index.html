@@ -8,17 +8,20 @@
   </head>
   <body>
     <div class="alert-box" id="alert">
-      알림창임
-      <button onclick="alertClose()">닫기</button>
+      <p>알림창임</p>
+      <button onclick="alertChange('none')">닫기</button>
     </div>
-    <button onclick="alertOpen()">버튼</button>
+    <button onclick="alertOpen('아이디를 입력하세요')">버튼1</button>
+    <button onclick="alertOpen('비밀번호를 입력하세요')">버튼2</button>
 
     <script>
-      const alertOpen = () => {
-        document.getElementById("alert").style.display = "block";
+      const alertChange = (구멍) => {
+        document.getElementById("alert").style.display = 구멍;
       };
-      const alertClose = () => {
-        document.getElementById("alert").style.display = "none";
+      const alertOpen = (message) => {
+        const alert_box = document.getElementById("alert");
+        alert_box.getElementsByTagName("p")[0].innerHTML = message;
+        alertChange("block");
       };
     </script>
   </body>
