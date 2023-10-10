@@ -21,14 +21,14 @@
     <div class="black-bg show-modal">
       <div class="white-bg">
         <h4>로그인하세요</h4>
-        <form action="success.html">
+        <form action="success.html" id="logform">
           <div class="my-3">
             <input type="text" class="form-control" id="logid" />
           </div>
           <div class="my-3">
             <input type="password" class="form-control" id="logpass" />
           </div>
-          <button type="button" class="btn btn-primary" id="commit">
+          <button type="submit" class="btn btn-primary" id="commit">
             전송
           </button>
           <button type="button" class="btn btn-danger" id="close">닫기</button>
@@ -36,14 +36,19 @@
       </div>
     </div>
     <script>
-      document.querySelector("#commit").addEventListener("click", () => {
+      document.querySelector("#logform").addEventListener("submit", (e) => {
         const log_id = document.querySelector("#logid");
         const log_pass = document.querySelector("#logpass");
 
         if (log_id.value == "") {
           alert("아이디를 입력해주세요.");
+          e.preventDefault();
         } else if (log_pass.value == "") {
           alert("비밀번호를 입력해주세요.");
+          e.preventDefault();
+        } else if (log_pass.value.length < 6) {
+          alert("비밀번호는 6자 이상 입력해주세요.");
+          e.preventDefault();
         }
       });
     </script>
