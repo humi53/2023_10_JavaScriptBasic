@@ -1,3 +1,7 @@
+.dark {
+  background-color: black;
+  color: white;
+}
 .list-group {
   visibility: hidden;
   overflow: hidden;
