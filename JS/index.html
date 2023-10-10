@@ -63,6 +63,27 @@
       <button id="login" class="btn btn-danger">로그인</button>
     </div>
 
+    <div class="alert alert-danger" id="countLable">
+      5초 이내 구매시 사은품 증정!
+    </div>
+    <script>
+      // setTimeout(() => {
+      //   $(".alert").hide();
+      // }, 5000);
+      // setInterval(() => {
+      //   console.log("안녕");
+      // }, 1000);
+      let hideCount = 5;
+      const myInterval = setInterval(() => {
+        if (hideCount <= 0) {
+          $(".alert").hide();
+          clearInterval(myInterval);
+        } else {
+          hideCount--;
+          $("#countLable").html(hideCount + "초 이내 구매시 사은품 증정!");
+        }
+      }, 1000);
+    </script>
     <script>
       let count = 0;
       $(".badge").on("click", function () {
