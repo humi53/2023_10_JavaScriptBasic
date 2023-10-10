@@ -1,5 +1,12 @@
 .list-group {
-  display: none;
+  visibility: hidden;
+  overflow: hidden;
+  height: 0px;
+  transition: all 1s;
+}
+.show-list {
+  visibility: visible;
+  height: 210px;
 }
 
 .black-bg {
@@ -9,8 +16,15 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 5;
   padding: 30px;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 1s;
 }
+.show-modal {
+  visibility: visible;
+  opacity: 1;
+}
+
 .white-bg {
   background: white;
   border-radius: 5px;

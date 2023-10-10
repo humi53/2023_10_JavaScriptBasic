@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
-    <div class="black-bg">
+    <div class="black-bg show-modal">
       <div class="white-bg">
         <h4>로그인하세요</h4>
         <button class="btn btn-danger" id="close">닫기</button>
@@ -47,16 +47,16 @@
 
     <script>
       $("#login").on("click", function () {
-        $(".black-bg").fadeIn();
+        $(".black-bg").toggleClass("show-modal");
       });
       $("#close").on("click", function () {
-        $(".black-bg").fadeOut();
+        $(".black-bg").toggleClass("show-modal");
       });
 
       document
         .querySelector(".navbar-toggler")
         .addEventListener("click", () => {
-          document.querySelector(".list-group").classList.toggle("show");
+          document.querySelector(".list-group").classList.toggle("show-list");
         });
     </script>
     <script
