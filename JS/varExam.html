@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>나의 홈페이지</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      var account = 60000;
+      var nextAccount = 0;
+      const MIN = 1.15;
+      const MAX = 1.2;
+      if (account < 50000) {
+        nextAccount = account * MIN ** 2;
+      } else if (account >= 50000) {
+        nextAccount = account * MAX ** 2;
+      }
+
+      console.log(nextAccount);
+
+      var first = 360;
+      var total = first + (first * 2) / 3 + first * (2 / 3) ** 2;
+      console.log(total);
+      // 무한등비수열의 합이라..
+    </script>
+
+    <p>태조 이성계가 태어난 년도는?</p>
+    <input type="text" id="answer" />
+    <button id="send-answer">제출</button>
+
+    <script>
+      const sendButton = document.querySelector("#send-answer");
+      let count = 0;
+      sendButton.addEventListener("click", function () {
+        count++;
+        answer = document.querySelector("#answer");
+        if (answer.value == 1335) {
+          alert("성공");
+        } else if (count >= 3 && answer.value != 1335) {
+          alert("멍청아");
+        }
+      });
+    </script>
+  </body>
+</html>
