@@ -36,20 +36,9 @@
       </div>
     </div>
     <script>
-      document.querySelector("#logform").addEventListener("submit", (e) => {
-        const log_id = document.querySelector("#logid");
-        const log_pass = document.querySelector("#logpass");
-
-        if (log_id.value == "") {
-          alert("아이디를 입력해주세요.");
-          e.preventDefault();
-        } else if (log_pass.value == "") {
-          alert("비밀번호를 입력해주세요.");
-          e.preventDefault();
-        } else if (log_pass.value.length < 6) {
-          alert("비밀번호는 6자 이상 입력해주세요.");
-          e.preventDefault();
-        }
+      // change, input : change는 값을 바꾸고 포커스를 잃을때
+      document.getElementById("logid").addEventListener("input", () => {
+        console.log("안녕");
       });
     </script>
     <nav class="navbar navbar-light bg-light">
