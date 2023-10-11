@@ -80,6 +80,46 @@
     <button class="slide-item" data-num="2">3</button>
     <button class="slide-item" data-num="next">다음</button>
 
+    <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam numquam
+      distinctio cumque exercitationem. Harum eveniet perferendis est molestias
+      magnam odio voluptas delectus quod mollitia tenetur qui iusto officia,
+      fuga dignissimos.
+    </div>
+    <div style="height: 1000px"></div>
+
+    <script>
+      // div 의 스크롤 바 내린양 + 눈에보이는 div높이 == div의 실제높이
+      let scrollCheck = 0;
+      $(".lorem").on("scroll", function () {
+        var scrollTop = document.querySelector(".lorem").scrollTop;
+        var clientHeight = document.querySelector(".lorem").clientHeight;
+        var scrollHeight = document.querySelector(".lorem").scrollHeight;
+        if (scrollTop + clientHeight + 10 >= scrollHeight) {
+          if (scrollCheck == 0) {
+            alert("다보셨군요.");
+            scrollCheck = 1;
+          }
+        }
+      });
+    </script>
+    <script>
+      window.addEventListener("scroll", function () {
+        // window.pageYOffset; // 똑같음
+        // window.scrollTo(0, 100); //강제 스크롤
+        // window.scrollBy(0, 100); // 100만큼 스크롤 해주세요.
+        if (window.scrollY > 100) {
+          console.log(window.scrollY > 100);
+          $(".navbar-brand").css("font-size", "20px");
+        } else {
+          $(".navbar-brand").css("font-size", "30px");
+        }
+        // $(window).on("scroll", function () {
+        //   $(window).scrollTop(100); // scrolly랑 같음 //이동도 해줌
+        // });
+        console.log(window.scrollY);
+      });
+    </script>
     <script>
       /** 캐러셀
        * 1. 애니메이션 시작 전 화면만들기

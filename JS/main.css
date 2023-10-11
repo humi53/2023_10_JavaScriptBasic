@@ -1,3 +1,7 @@
+/* bootstrap스무스하게 동작하는거 원상복귀  */
+/* :root {
+  scroll-behavior: auto; 
+} */
 .dark {
   background-color: black;
   color: white;
@@ -50,4 +54,14 @@
 }
 .slide-box img {
   width: 100%;
+}
+
+.navbar {
+  position: fixed; /* 상단고정 */
+  width: 100%;
+  z-index: 5;
+}
+.navbar-brand {
+  font-size: 30px;
+  transform: all 1s;
 }
