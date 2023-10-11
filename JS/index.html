@@ -36,6 +36,23 @@
       </div>
     </div>
     <script>
+      // 배경클릭시 닫아버릿
+      $(".black-bg").on("click", function (e) {
+        // e.target; // 유저가 실제로 누른거
+        // console.log(e.target);
+        // e.currentTarget; // 이벤트리스너 달린곳
+        // this;
+        // e.preventDefault(); // 이벤트 기본동작 막아줌 (submit 같은거)
+        // e.stopPropagation(); // 내 상위요소로 이벤트 버블링 막아줌
+        console.log($(e.target)); // e 이벤트의 요소 jquery화 배움.
+        console.log($(".black-bg"));
+        console.log($(e.target).is($(".black-bg")));
+        if ($(e.target).is($(".black-bg"))) {
+          $(".black-bg").removeClass("show-modal");
+        }
+      });
+    </script>
+    <script>
       // change, input : change는 값을 바꾸고 포커스를 잃을때
       document.getElementById("email").addEventListener("input", () => {
         console.log("안녕");
