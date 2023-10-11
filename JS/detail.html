@@ -48,28 +48,53 @@
     <select class="form-select mt-2">
       <option>모자</option>
       <option>셔츠</option>
+      <option>바지</option>
     </select>
     <select class="form-select mt-2 form-hide">
       <option>95</option>
       <option>100</option>
     </select>
   </form>
+  <div id="test">
+    <h4>반가워</h4>
+  </div>
   <div class="container mt-3">
     <div class="card p-3">
       <span class="car-title">상품명</span><span class="car-price">가격</span>
     </div>
   </div>
   <script>
+    // create가 조금더 빠름
+    // var temp = `<p>안녕</p>`;
+    // document.querySelector("#test").insertAdjacentHTML("beforeend", temp);
+    // document.querySelector("#test").innerHTML = temp;
+    // $("#test").append(temp);
+    // $("#test").html(temp);
+
+    // let a = document.createElement("p");
+    // a.innerHTML = "안녕";
+    // document.querySelector("#test").appendChild(a);
+
     $(".form-select")
       .eq(0)
       .on("input", function (e) {
         // 유져가 선택한게 셔츠면
+        let pants = [28, 30];
         const value = e.currentTarget.value;
         const subSelect = $(".form-select").eq(1);
         if (value == "셔츠") {
           subSelect.removeClass("form-hide");
         } else if (value == "모자") {
           subSelect.addClass("form-hide");
+        } else if (value == "바지") {
+          subSelect.html("");
+          for (let i = 0; i < pants.length; i++) {
+            let optionTemp = document.createElement("option");
+            console.log(pants[i]);
+            optionTemp.innerHTML = pants[i];
+            subSelect.append(optionTemp);
+          }
+          subSelect.removeClass("form-hide");
         }
       });
   </script>
