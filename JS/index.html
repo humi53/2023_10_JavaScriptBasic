@@ -64,7 +64,7 @@
     </div>
 
     <div class="alert alert-danger" id="countLable">
-      5초 이내 구매시 사은품 증정!
+      <span>5</span>초 이내 구매시 사은품 증정!
     </div>
     <script>
       // setTimeout(() => {
@@ -80,7 +80,7 @@
           clearInterval(myInterval);
         } else {
           hideCount--;
-          $("#countLable").html(hideCount + "초 이내 구매시 사은품 증정!");
+          $("#countLable").find("span").html(hideCount);
         }
       }, 1000);
     </script>
