@@ -101,6 +101,10 @@
             scrollCheck = 1;
           }
         }
+        // 로드 완료시 작동하도록 작성
+        document.documentElement.scrollHeight;
+        document.querySelector("html").clientHeight;
+        window.scrollY;
       });
     </script>
     <script>
@@ -112,7 +116,7 @@
           console.log(window.scrollY > 100);
           $(".navbar-brand").css("font-size", "20px");
         } else {
-          $(".navbar-brand").css("font-size", "30px");
+          $(".navbar-brand").css("font-size", "25px");
         }
         // $(window).on("scroll", function () {
         //   $(window).scrollTop(100); // scrolly랑 같음 //이동도 해줌
