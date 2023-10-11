@@ -54,7 +54,7 @@
       let cards = document.querySelectorAll(".card .card-body");
       for (let i = 0; i < cards.length; i++) {
         cards[i].querySelector("h5").innerHTML = products[i]["title"];
-        cards[i].querySelector("p").innerHTML = products[i]["price"];
+        cards[i].querySelector("p").innerHTML = `가격: ${products[i]["price"]}`;
       }
     </script>
     <script
