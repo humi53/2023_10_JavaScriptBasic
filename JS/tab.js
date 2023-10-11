@@ -15,7 +15,7 @@ $(".tab-button").on("click", function (e) {
   const clickedElement = e.target;
   tabButtons.removeClass("orange");
   tabContents.removeClass("show");
-  for (i = 0; i < tabButtonLength; i++) {
+  for (let i = 0; i < tabButtonLength; i++) {
     if (tabButtons.eq(i).is(clickedElement)) {
       tabButtons.eq(i).addClass("orange");
       tabContents.eq(i).addClass("show");
