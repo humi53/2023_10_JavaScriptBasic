@@ -43,11 +43,36 @@
       crossorigin="anonymous"
     ></script>
   </body>
+  <form class="container my-5 form-group">
+    <p>상품선택</p>
+    <select class="form-select mt-2">
+      <option>모자</option>
+      <option>셔츠</option>
+    </select>
+    <select class="form-select mt-2 form-hide">
+      <option>95</option>
+      <option>100</option>
+    </select>
+  </form>
   <div class="container mt-3">
     <div class="card p-3">
       <span class="car-title">상품명</span><span class="car-price">가격</span>
     </div>
   </div>
+  <script>
+    $(".form-select")
+      .eq(0)
+      .on("input", function (e) {
+        // 유져가 선택한게 셔츠면
+        const value = e.currentTarget.value;
+        const subSelect = $(".form-select").eq(1);
+        if (value == "셔츠") {
+          subSelect.removeClass("form-hide");
+        } else if (value == "모자") {
+          subSelect.addClass("form-hide");
+        }
+      });
+  </script>
   <script>
     let car2 = { name: "소나타", price: [50000, 3000, 4000] };
 
