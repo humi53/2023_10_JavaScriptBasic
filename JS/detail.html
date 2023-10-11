@@ -75,28 +75,41 @@
     // a.innerHTML = "안녕";
     // document.querySelector("#test").appendChild(a);
 
+    let pants = [28, 30, 32, 34];
+    let shirts = [95, 100, 105];
     $(".form-select")
       .eq(0)
       .on("input", function (e) {
         // 유져가 선택한게 셔츠면
-        let pants = [28, 30];
         const value = e.currentTarget.value;
         const subSelect = $(".form-select").eq(1);
         if (value == "셔츠") {
           subSelect.removeClass("form-hide");
         } else if (value == "모자") {
-          subSelect.addClass("form-hide");
+          // ()=>{} 안에서 쓸수 있는 this 값이 달라짐.
+          subSelect.html("");
+          shirts.forEach((data) => {
+            subSelect.append(`<option>${data}</option>`);
+          });
+          subSelect.removeClass("form-hide");
         } else if (value == "바지") {
           subSelect.html("");
-          for (let i = 0; i < pants.length; i++) {
-            let optionTemp = document.createElement("option");
-            console.log(pants[i]);
-            optionTemp.innerHTML = pants[i];
-            subSelect.append(optionTemp);
-          }
+          // for (let i = 0; i < pants.length; i++) {
+          //   let optionTemp = document.createElement("option");
+          //   optionTemp.innerHTML = pants[i];
+          //   subSelect.append(optionTemp);
+          // }
+          pants.forEach(function (data, i) {
+            // i는 1씩 증가하는 정수
+            subSelect.append(`<option>${data}</option>`);
+          });
           subSelect.removeClass("form-hide");
         }
       });
+    var obj = { name: "kim", age: 20 };
+    for (var key in obj) {
+      console.log(obj[key]);
+    }
   </script>
   <script>
     let car2 = { name: "소나타", price: [50000, 3000, 4000] };
