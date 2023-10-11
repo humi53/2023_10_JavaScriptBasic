@@ -74,11 +74,11 @@
         <div class="slide-box"><img src="car3.png" /></div>
       </div>
     </div>
-    <button class="slide-prev">이전</button>
-    <button class="slide-1">1</button>
-    <button class="slide-2">2</button>
-    <button class="slide-3">3</button>
-    <button class="slide-next">다음</button>
+    <button class="slide-item" data-num="prev">이전</button>
+    <button class="slide-item" data-num="0">1</button>
+    <button class="slide-item" data-num="1">2</button>
+    <button class="slide-item" data-num="2">3</button>
+    <button class="slide-item" data-num="next">다음</button>
 
     <script>
       /** 캐러셀
@@ -89,32 +89,22 @@
        */
       let currentX = 0;
       const currentChildrenCount = $("slide-container").children.length;
-      $(".slide-1").on("click", function () {
-        $(".slide-container").css("transform", "translateX(0vw)");
-        currentX = 0;
-      });
-      $(".slide-2").on("click", function () {
-        $(".slide-container").css("transform", "translateX(-100vw)");
-        currentX = 1;
-      });
-      $(".slide-3").on("click", function () {
-        $(".slide-container").css("transform", "translateX(-200vw)");
-        currentX = 2;
-      });
-
-      $(".slide-next").on("click", function () {
-        if (currentX < currentChildrenCount) currentX++;
+      const transformPlay = () => {
         $(".slide-container").css(
           "transform",
           `translateX(${currentX * -100}vw)`
         );
-      });
-      $(".slide-prev").on("click", function () {
-        if (currentX > 0) currentX--;
-        $(".slide-container").css(
-          "transform",
-          `translateX(${currentX * -100}vw)`
-        );
+      };
+      $(".slide-item").on("click", function () {
+        const thisNum = $(this).data("num");
+        if (thisNum == "prev") {
+          if (currentX > 0) currentX--;
+        } else if (thisNum == "next") {
+          if (currentX < currentChildrenCount) currentX++;
+        } else {
+          currentX = thisNum;
+        }
+        transformPlay();
       });
     </script>
     <script>
