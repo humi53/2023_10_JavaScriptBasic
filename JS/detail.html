@@ -44,6 +44,15 @@
     ></script>
   </body>
   <div class="container mt-3">
-    <div class="card p-3">상품명 / 가격</div>
+    <div class="card p-3"><span>상품명</span><span>가격</span></div>
   </div>
+  <script>
+    let car = ["소나타", 50000, "white"];
+    let car2 = { name: "소나타", price: 50000 };
+    console.log(car.slice(1, 3));
+    const card = document.querySelector(".card");
+    card.querySelectorAll("span")[0].innerHTML = car2.name;
+    card.querySelectorAll("span")[1].innerHTML = car2.price;
+    console.log(card.querySelectorAll("span")[0]);
+  </script>
 </html>
