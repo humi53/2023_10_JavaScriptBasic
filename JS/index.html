@@ -23,7 +23,7 @@
         <h4>로그인하세요</h4>
         <form action="success.html" id="logform">
           <div class="my-3">
-            <input type="text" class="form-control" id="logid" />
+            <input type="text" class="form-control" id="email" />
           </div>
           <div class="my-3">
             <input type="password" class="form-control" id="logpass" />
@@ -37,7 +37,7 @@
     </div>
     <script>
       // change, input : change는 값을 바꾸고 포커스를 잃을때
-      document.getElementById("logid").addEventListener("input", () => {
+      document.getElementById("email").addEventListener("input", () => {
         console.log("안녕");
       });
     </script>
@@ -66,6 +66,22 @@
     <div class="alert alert-danger" id="countLable">
       <span>5</span>초 이내 구매시 사은품 증정!
     </div>
+
+    <script>
+      $("form").on("submit", function (e) {
+        let email = document.getElementById("email").value;
+        if (!/\S+@\S+.\S+/.test(email)) {
+          alert("이메일형식아님");
+          e.preventDefault();
+        }
+        let logpass = document.getElementById("logpass").value;
+        console.log(/[A-Z]/.test(logpass));
+        if (!/[A-Z]/.test(logpass)) {
+          alert("비밀번호는 대문자를 포함해야 합니다");
+          e.preventDefault();
+        }
+      });
+    </script>
     <script>
       // setTimeout(() => {
       //   $(".alert").hide();
