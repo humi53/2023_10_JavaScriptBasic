@@ -89,12 +89,6 @@
        */
       let currentX = 0;
       const currentChildrenCount = $("slide-container").children.length;
-      const transformPlay = () => {
-        $(".slide-container").css(
-          "transform",
-          `translateX(${currentX * -100}vw)`
-        );
-      };
       $(".slide-item").on("click", function () {
         const thisNum = $(this).data("num");
         if (thisNum == "prev") {
@@ -104,7 +98,10 @@
         } else {
           currentX = thisNum;
         }
-        transformPlay();
+        $(".slide-container").css(
+          "transform",
+          `translateX(${currentX * -100}vw)`
+        );
       });
     </script>
     <script>
