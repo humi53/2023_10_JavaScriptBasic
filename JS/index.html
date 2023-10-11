@@ -67,6 +67,56 @@
       <span>5</span>초 이내 구매시 사은품 증정!
     </div>
 
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box"><img src="car1.png" /></div>
+        <div class="slide-box"><img src="car2.png" /></div>
+        <div class="slide-box"><img src="car3.png" /></div>
+      </div>
+    </div>
+    <button class="slide-prev">이전</button>
+    <button class="slide-1">1</button>
+    <button class="slide-2">2</button>
+    <button class="slide-3">3</button>
+    <button class="slide-next">다음</button>
+
+    <script>
+      /** 캐러셀
+       * 1. 애니메이션 시작 전 화면만들기
+       * 2. 애니메이션 종료 후 화면 만들기
+       * 3. 언제 종료화면으로 변할지 JS 코드작성
+       * 4. transition 추가
+       */
+      let currentX = 0;
+      const currentChildrenCount = $("slide-container").children.length;
+      $(".slide-1").on("click", function () {
+        $(".slide-container").css("transform", "translateX(0vw)");
+        currentX = 0;
+      });
+      $(".slide-2").on("click", function () {
+        $(".slide-container").css("transform", "translateX(-100vw)");
+        currentX = 1;
+      });
+      $(".slide-3").on("click", function () {
+        $(".slide-container").css("transform", "translateX(-200vw)");
+        currentX = 2;
+      });
+
+      $(".slide-next").on("click", function () {
+        if (currentX < currentChildrenCount) currentX++;
+        $(".slide-container").css(
+          "transform",
+          `translateX(${currentX * -100}vw)`
+        );
+      });
+      $(".slide-prev").on("click", function () {
+        if (currentX > 0) currentX--;
+        $(".slide-container").css(
+          "transform",
+          `translateX(${currentX * -100}vw)`
+        );
+      });
+    </script>
     <script>
       $("form").on("submit", function (e) {
         let email = document.getElementById("email").value;
