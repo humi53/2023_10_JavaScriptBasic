@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>장바구니 페이지</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cart">
+      <div><h1>장바구니 목록</h1></div>
+    </div>
+    <script>
+      let cart = document.querySelector(".cart");
+      let cartItems = JSON.parse(localStorage.getItem("cart"));
+      cartItems.forEach((element) => {
+        let item = document.createElement("p");
+        item.innerHTML = element;
+        cart.appendChild(item);
+        console.log(element);
+      });
+    </script>
+  </body>
+</html>
