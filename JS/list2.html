@@ -34,6 +34,12 @@
     <div class="container">
       <button class="btn btn-danger" id="price">가격순정렬</button>
     </div>
+    <div class="container">
+      <button class="btn btn-danger" id="title">이름순정렬</button>
+    </div>
+    <div class="container">
+      <button class="btn btn-danger" id="six">6만원이하</button>
+    </div>
     <script>
       var 어레이 = [7, 3, 5, 2, 40];
       var 어레이2 = ["a", "c", "b"];
@@ -102,6 +108,22 @@
         });
         simpleRender();
         console.log(products);
+      });
+      $("#title").click(function () {
+        products.sort((a, b) => {
+          if (a.title < b.title) return 1;
+          else if (a.title > b.title) return -1;
+          else return 0;
+        });
+        simpleRender();
+        console.log(products);
+      });
+      $("#six").click(function () {
+        const sempleProducts = products.filter((element) => {
+          return element.price <= 60000;
+        });
+        renderProducts(sempleProducts);
+        console.log(sempleProducts);
       });
     </script>
     <script
