@@ -140,6 +140,7 @@ load 라는 이벤트리스너를 사용하면 DOM 생성뿐만 아니라 이미
 
 그 js 파일보다 이미지가 더 먼저 로드되는 경우도 있으니 이벤트 발생체크를 못할 수도 있겠군요
 
+```javaScript
 $(window).on('load', function(){
 //document 안의 이미지, js 파일 포함 전부 로드가 되었을 경우 실행할 코드
 });
@@ -147,6 +148,9 @@ $(window).on('load', function(){
 window.addEventListener('load', function(){
 //document 안의 이미지, js 파일 포함 전부 로드가 되었을 경우 실행할 코드
 })
+
+```
+
 window에 붙이셔도 됩니다. document에 포함된 이미지, CSS파일 등 모든것이 로드가 되었는지 체크해줍니다.
 
 ready 이런거랑 차이는 앞선 .ready()는 DOM 생성만 체크하는 함수인데,
