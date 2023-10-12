@@ -35,7 +35,7 @@
       <button class="btn btn-danger" id="price">가격순정렬</button>
     </div>
     <div class="container">
-      <button class="btn btn-danger" id="title">이름순정렬</button>
+      <button class="btn btn-danger" id="title">다나가순정렬</button>
     </div>
     <div class="container">
       <button class="btn btn-danger" id="six">6만원이하</button>
@@ -119,9 +119,9 @@
         console.log(products);
       });
       $("#six").click(function () {
-        const sempleProducts = products.filter((element) => {
-          return element.price <= 60000;
-        });
+        const sempleProducts = products.filter(
+          (element) => element.price <= 60000
+        );
         renderProducts(sempleProducts);
         console.log(sempleProducts);
       });
