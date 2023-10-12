@@ -31,15 +31,36 @@
     <div class="container">
       <button class="btn btn-danger" id="more">더보기</button>
     </div>
+    <div class="container">
+      <button class="btn btn-danger" id="price">가격순정렬</button>
+    </div>
+    <script>
+      var 어레이 = [7, 3, 5, 2, 40];
+      var 어레이2 = ["a", "c", "b"];
+      어레이.sort((a, b) => {
+        return a - b; // 양수면 a를 오른쪽으로, 음수면 b를 오른쪽으로
+      });
+      어레이2.sort(); // 역순도 해보자
+      console.log(어레이2);
+      // let 새어레이 = 어레이.filter(function (a) {
+      // return a < 4;
+      // });
+      let 새어레이 = 어레이.map(function (a) {
+        return a * 1000;
+      });
+      console.log(새어레이);
+    </script>
     <script>
       let products = [
         { id: 0, price: 70000, title: "Blossom Dress" },
         { id: 1, price: 50000, title: "Springfield Shirt" },
         { id: 2, price: 60000, title: "Black Monastery" },
       ];
+
       const row = document.querySelector(".row");
 
       function renderProducts(data) {
+        row.innerHTML = "";
         data.forEach((element) => {
           const card = document.createElement("div");
           card.classList.add("col-sm-4");
@@ -49,7 +70,10 @@
           row.appendChild(card);
         });
       }
-      renderProducts(products);
+      function simpleRender() {
+        renderProducts(products);
+      }
+      simpleRender();
       let fetchCount = 0;
       let fetchURL = [
         "https://codingapple1.github.io/js/more1.json",
@@ -60,7 +84,8 @@
           fetch(fetchURL[fetchCount])
             .then((res) => res.json())
             .then((data) => {
-              renderProducts(data);
+              products.push(...data);
+              simpleRender();
             })
             .catch((error) => {
               console.log(error);
@@ -68,6 +93,15 @@
           fetchCount++;
         }
         console.log(fetchCount);
+      });
+    </script>
+    <script>
+      $("#price").click(function () {
+        products.sort((a, b) => {
+          return a["price"] - b["price"];
+        });
+        simpleRender();
+        console.log(products);
       });
     </script>
     <script
