@@ -147,9 +147,15 @@
           if (cart == null) {
             cart = [];
           }
-          cart.push(itemTitle);
+          const index = cart.findIndex((element) => element.title == itemTitle);
+          if (index !== -1) {
+            cart[index].num += 1;
+          } else {
+            cart.push({ title: itemTitle, num: 1 });
+          }
+
           localStorage.setItem("cart", JSON.stringify(cart));
-          // console.log(localStorage.getItem("cart"));
+          console.log(localStorage.getItem("cart"));
         });
       });
       // jquery로 이벤트 (불가) (동적요소가 추가될때 일일이 이벤트 달아야됨.)
