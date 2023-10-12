@@ -1,0 +1,39 @@
+<script>
+  var 출석부 = ["흥민", "영희", "철수", "재석"];
+
+  function 이름찾기(name) {
+    let result = "없어요";
+    출석부.forEach((element) => {
+      if (name == element) {
+        result = "있어요";
+      }
+    });
+    console.log(result);
+  }
+  이름찾기("철수");
+  이름찾기("명수");
+
+  function 구구단(num) {
+    for (let i = 1; i <= 9; i++) {
+      console.log(num * i);
+    }
+  }
+  for (let i = 2; i <= 9; i++) {
+    구구단(i);
+  }
+
+  function 평균점수계산기(array, newScore) {
+    let total = 0;
+    array.forEach((element) => {
+      total += element;
+    });
+    let avg = total / array.length;
+    if (newScore > avg) {
+      console.log(`평균보다 ${newScore - avg}점이 올랐네요`);
+    } else {
+      console.log(`평균보다 ${avg - newScore}점이 떨어졌네요 재수추천`);
+    }
+  }
+  평균점수계산기([10, 20, 30, 40, 50], 40);
+  평균점수계산기([40, 40, 40], 20);
+</script>
