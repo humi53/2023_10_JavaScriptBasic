@@ -14,11 +14,11 @@ Document Object Model 이라는 뜻인데 그냥 설명하면 이해가 안되�
 
 그래서 자바스크립트에선 <p></p> 이런 html을 직접 해석하고 조작할 수 없습니다.
 
+```html
 <script>
-
   <p></p>.innerHTML = '안녕' (당연히 에러날듯)
-
 </script>
+```
 
 자바스크립트는 <p> 이런건 못알아듣습니다.
 
@@ -34,22 +34,26 @@ HTML을 자바스크립트로 쉽게 찾고 바꾸기 위해 object와 비슷한
 
 예를 들어서
 
-<div style="color : red">안녕하세요</div>
+`<div style="color : red">안녕하세요</div>`
 브라우저는 이런 HTML을 발견하면 object 자료로 바꿔서 보관해둡니다.
 
 구체적으로는 var document = { } 이런 변수를 하나 만들어서 거기 넣어줍니다.
 
+```javascript
 var document = {
-div1 : {
-style : {color : 'red'}
-innerHTML : '안녕하세요'
+    div1 : {
+        style : {color : 'red'}
+        innerHTML : '안녕하세요'
+    }
 }
-}
+
+```
+
 ▲ 대충 이렇게 object 자료에 정리를 해놓는다는 소리입니다.
 
 왜냐고요? 이래야 저렇게 점찍어서 원하는 자료를 출력하고 조작하고 할 수 있지 않겠습니까.
 
-이제 document.div1.innerHTML = '안녕' 이렇게 자바스크립트를 짜면 HTML 조작이 가능할듯요
+이제 `document.div1.innerHTML = '안녕'` 이렇게 자바스크립트를 짜면 HTML 조작이 가능할듯요
 
 그래서 저렇게 object에 담아두는 것입니다.
 
@@ -71,11 +75,13 @@ object 자료로 정리한걸 DOM이라고 부릅니다.
 
 (html 파일)
 
+```html
 <script>
-  document.getElementById('test').innerHTML = '안녕'
+  document.getElementById("test").innerHTML = "안녕";
 </script>
-
 <p id="test">임시글자</p>
+```
+
 이렇게 코드짜면 에러가 납니다.
 
 왜겠습니까
@@ -86,7 +92,7 @@ object 자료로 정리한걸 DOM이라고 부릅니다.
 
 그래서 에러가 날 뿐입니다.
 
-왜냐면 아직 <p id="test">를 읽기 전이라 p태그에 대한 DOM이 아직 생성되지 않았으니까요.
+왜냐면 아직 `<p id="test">`를 읽기 전이라 p태그에 대한 DOM이 아직 생성되지 않았으니까요.
 
 이렇듯 자바스크립트는 DOM이 생성된 경우에만 HTML을 변경할 수 있습니다.
 
@@ -96,8 +102,11 @@ object 자료로 정리한걸 DOM이라고 부릅니다.
 
 그러면 아까 예제같은 문제가 발생하지 않습니다.
 
+```javascript
 $(document).ready(function(){ 실행할 코드 })
 document.addEventListener('DOMContentLoaded', function() { 실행할 코드 })
+```
+
 둘 중 마음에 드는거 쓰면 됩니다.
 
 이 이벤트리스너들은 "HTML을 다 읽어들였는지"를 알려주는 이벤트리스너입니다.
@@ -112,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() { 실행할 코드 })
 </script>
 ```
 
-<p id="test">임시글자</p>
+`<p id="test">임시글자</p>`
 그래서 거기 안에 "저 밑에있는 <p id="test"> 변경해주세요~" 라고 코드 짜도 잘 동작함
 
 그래서 예전스타일 강의들 보시면 ready 아니면 DOMContentLoaded 이벤트리스너를 꼭 쓰라고 가르칩니다.
