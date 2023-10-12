@@ -28,7 +28,9 @@
         </div> -->
       </div>
     </div>
-
+    <div class="container">
+      <button class="btn btn-danger" id="more">더보기</button>
+    </div>
     <script>
       let products = [
         { id: 0, price: 70000, title: "Blossom Dress" },
@@ -37,13 +39,35 @@
       ];
       const row = document.querySelector(".row");
 
-      products.forEach((element) => {
-        const card = document.createElement("div");
-        card.classList.add("col-sm-4");
-        card.innerHTML = `<img src="https://via.placeholder.com/600" class="w-100" />
+      function renderProducts(data) {
+        data.forEach((element) => {
+          const card = document.createElement("div");
+          card.classList.add("col-sm-4");
+          card.innerHTML = `<img src="https://via.placeholder.com/600" class="w-100" />
             <h5>${element["title"]}</h5>
             <p>가격 : ${element["price"]}</p>`;
-        row.appendChild(card);
+          row.appendChild(card);
+        });
+      }
+      renderProducts(products);
+      let fetchCount = 0;
+      let fetchURL = [
+        "https://codingapple1.github.io/js/more1.json",
+        "https://codingapple1.github.io/js/more2.json",
+      ];
+      document.querySelector("#more").addEventListener("click", () => {
+        if (fetchCount < fetchURL.length) {
+          fetch(fetchURL[fetchCount])
+            .then((res) => res.json())
+            .then((data) => {
+              renderProducts(data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+          fetchCount++;
+        }
+        console.log(fetchCount);
       });
     </script>
     <script
