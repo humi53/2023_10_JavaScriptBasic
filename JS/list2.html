@@ -139,7 +139,7 @@
 
       // sibling (내 형제요소)
 
-      // 이벤트 버블링.
+      // 이벤트 버블링. (동적요소때문에 선택권 없음.)
       $(document).ready(function () {
         $(document).on("click", ".buy", function (e) {
           let itemTitle = $(e.target).siblings(".title")[0].innerText;
