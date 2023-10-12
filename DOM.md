@@ -104,11 +104,13 @@ document.addEventListener('DOMContentLoaded', function() { 실행할 코드 })
 
 (html 파일)
 
+```html
 <script>
-  document.addEventListener('DOMContentLoaded', function() { 
-    document.getElementById('test').innerHTML = '안녕'
-  })
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("test").innerHTML = "안녕";
+  });
 </script>
+```
 
 <p id="test">임시글자</p>
 그래서 거기 안에 "저 밑에있는 <p id="test"> 변경해주세요~" 라고 코드 짜도 잘 동작함
@@ -131,9 +133,13 @@ load 라는 이벤트리스너를 사용하면 DOM 생성뿐만 아니라 이미
 
 이미지 같은게 로드되면 load라는 이벤트가 발생하기 때문입니다.
 
+```javaScript
 셀렉터로찾은이미지.addEventListener('load', function(){
 //이미지 로드되면 실행할 코드
 })
+
+```
+
 이런 식으로 쓰면 됩니다.
 
 근데 외부 자바스크립트 파일에 저걸 적어놓으면
