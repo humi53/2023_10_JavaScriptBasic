@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>나의 홈페이지</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h4>물에 빠지면 누구먼저 구할 것임?</h4>
+    <div id="quiz">
+      <button>와이프</button>
+      <button>부모님</button>
+      <button>키우던 개</button>
+    </div>
+
+    <script>
+      document.querySelector("#quiz").addEventListener("click", function (e) {
+        switch (e.target.innerHTML) {
+          case "와이프":
+            alert("부모님은?");
+            break;
+          case "부모님":
+            alert("와이프는?");
+            break;
+          case "키우던 개":
+            alert("개 새끼랑 평생 살아라");
+            break;
+        }
+      });
+      // let temp = 2 + 5;
+      // switch (temp) {
+      //   case 3:
+      //     alert("변수가 3이네요");
+      //     break;
+      //   case 4:
+      //     alert("변수가 4이네요");
+      //     break;
+      //   default:
+      //     alert("아무것도 해당안됨");
+      // }
+    </script>
+  </body>
+</html>
