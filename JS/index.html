@@ -149,11 +149,60 @@
           console.log("+100 이상 이동");
           currentX--;
         }
-        $(".slide-container").addClass("transitionOn");
-        $(".slide-container").css(
-          "transform",
-          `translateX(${currentX * -100}vw)`
-        );
+        $(".slide-container")
+          .addClass("transitionOn")
+          .css("transform", `translateX(${currentX * -100}vw)`);
+
+        // 시간차 css 제거. 하지만 난 안씀.
+        // setTimeout(() => {
+        //   $(".slide-container").css("transition", "none");
+        // }, 500);
+        clickCheck = false;
+      });
+
+      /**
+       * 터치 이벤트도 만들어봄. 하지만 테스트는 안해봄.
+       * 그냥 Hammer.js 를 가져다 스세.
+       *    브라우저 호환성도 잡아주고,
+       *    이벤트 리스너 6개 말고 1개만으로 구현됨
+       *    스와이프, pinch, rotate 이벤트리스너도 제공.
+       * 심심하면 찾아보라는데 지금은 안찾아봄 다른거 공부할래.
+       */
+      $(".slide-box").on("touchstart", function (e) {
+        $(".slide-container").removeClass("transitionOn");
+        startX = e.touches[0].clientX;
+        clickCheck = true;
+        imgSizeX = parseInt($(".slide-box").css("width"));
+      });
+      $(".slide-box").on("touchmove", function (e) {
+        if (clickCheck) {
+          let containerX = e.touches[0].clientX - startX - imgSizeX * currentX;
+          let containerSizeX = imgSizeX * currentChildrenCount;
+          if (containerX <= 0 && containerX >= -containerSizeX) {
+            $(".slide-container").css(
+              "transform",
+              `translateX(${containerX}px)`
+            );
+          }
+        }
+      });
+      $(".slide-box").on("touchend", function (e) {
+        let containerX =
+          e.changedTouches[0].clientX - startX - imgSizeX * currentX;
+        let containerSizeX = imgSizeX * currentChildrenCount;
+        if (
+          containerX >= -containerSizeX &&
+          e.changedTouches[0].clientX - startX < -100
+        ) {
+          console.log("-100 이상 이동");
+          currentX++;
+        } else if (currentX > 0 && e.changedTouches[0].clientX - startX > 100) {
+          console.log("+100 이상 이동");
+          currentX--;
+        }
+        $(".slide-container")
+          .addClass("transitionOn")
+          .css("transform", `translateX(${currentX * -100}vw)`);
         clickCheck = false;
       });
     </script>
