@@ -48,7 +48,7 @@
   /* margin-left: -100vw; */
 }
 .transitionOn {
-  transition: all 0.5s;
+  transition: all 0.8s;
 }
 .slide-box {
   width: 100vw;
