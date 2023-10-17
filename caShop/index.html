@@ -49,8 +49,6 @@
         />
       </div>
     </div>
-    { "id": 1, "title": "원목 침대 프레임", "brand": "침대나라", "photo":
-    "pr2.jpg", "price": 20000 },
     <div class="container">
       <div class="row">
         <!-- <div class="card col-sm-3">
@@ -67,12 +65,36 @@
 
     <script>
       // Data 로딩.
-      fetch("./Data/store.json")
-        .then((response) => response.json())
-        .then((data) => {
-          const row = document.querySelector(".row");
-          data.products.forEach((element) => {
-            row.innerHTML += /*html*/ `
+      fetchData().then((data) => cardRender(data.products));
+
+      const searchA1 = document.querySelector("#search-a1");
+      searchA1.addEventListener("keyup", (event) => {
+        if (event.isComposing || event.keyCode === 229) return;
+        if (event.code == "Enter") {
+          // console.log(`${event.code == "Enter"} : ${searchA1.value}`);
+          fetchData().then((data) => {
+            const newData = data.products.map((element) => {
+              console.log(element.id);
+              if (element.id == 0) return id;
+              else return "";
+            });
+            console.log(data);
+          });
+        }
+      });
+
+      function fetchData() {
+        return fetch("./Data/store.json").then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        });
+      }
+      function cardRender(data) {
+        const row = document.querySelector(".row");
+        data.forEach((element) => {
+          row.innerHTML += /*html*/ `
             <div class="card col-sm-3">
               <img src="./Img/${element.photo}" class="w-100" />
               <div class="card-body">
@@ -82,10 +104,8 @@
                 <button class="btn btn-dark">담기</button>
               </div>
             </div>`;
-          });
         });
-      const searchA1 = document.querySelector("#search-a1");
-      console.log(searchA1);
+      }
     </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
