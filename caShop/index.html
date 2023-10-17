@@ -73,7 +73,7 @@
         if (event.isComposing || event.keyCode === 229) return;
         if (event.code == "Enter") {
           fetchData().then((data) => {
-            console.log(searchA1Value);
+            // console.log(searchA1Value);
             const newData = data.products.filter(
               (element) =>
                 element.title.includes(searchA1Value) ||
