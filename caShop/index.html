@@ -69,16 +69,30 @@
 
       const searchA1 = document.querySelector("#search-a1");
       searchA1.addEventListener("keyup", (event) => {
+        const searchA1Value = searchA1.value.trim();
         if (event.isComposing || event.keyCode === 229) return;
         if (event.code == "Enter") {
-          // console.log(`${event.code == "Enter"} : ${searchA1.value}`);
           fetchData().then((data) => {
-            const newData = data.products.map((element) => {
-              console.log(element.id);
-              if (element.id == 0) return id;
-              else return "";
+            console.log(searchA1Value);
+            const newData = data.products.filter(
+              (element) =>
+                element.title.includes(searchA1Value) ||
+                element.brand.includes(searchA1Value)
+            );
+            const htmlData = newData.map((element) => {
+              element.title = element.title.replace(
+                searchA1Value,
+                `<span style="background : yellow">${searchA1Value}</span>`
+              );
+              element.brand = element.brand.replace(
+                searchA1Value,
+                `<span style="background : yellow">${searchA1Value}</span>`
+              );
+              return element;
             });
-            console.log(data);
+            // console.log(htmlData);
+            searchA1.value = searchA1Value;
+            cardRender(htmlData);
           });
         }
       });
@@ -93,6 +107,7 @@
       }
       function cardRender(data) {
         const row = document.querySelector(".row");
+        row.innerHTML = "";
         data.forEach((element) => {
           row.innerHTML += /*html*/ `
             <div class="card col-sm-3">
