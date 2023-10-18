@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>산지직송 쇼핑몰</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link href="./CSS/index.css" rel="stylesheet" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="bg-light">
+    <div class="black-bg">
+      <div class="white-bg">
+        <h4>주문하세요</h4>
+        <form action="success.html" id="logform">
+          <div>성함</div>
+          <div class="my-3">
+            <input type="text" class="form-control" id="username" />
+          </div>
+          <div>연락처</div>
+          <div class="my-3">
+            <input type="text" class="form-control" id="tel" />
+          </div>
+          <button type="button" class="btn btn-primary" id="commit">
+            입력완료
+          </button>
+          <button type="button" class="btn btn-danger" id="close">닫기</button>
+        </form>
+      </div>
+    </div>
+    <div class="canvas-bg">
+      <div class="white-bg">
+        <div>
+          <canvas id="canvas" width="350" height="350"></canvas>
+        </div>
+        <div>
+          <button type="button" class="btn btn-danger" id="comp">
+            주문완료
+          </button>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">산지직송</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse show" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="#">Home </a>
+          <a class="nav-item nav-link" href="#">스토어</a>
+          <a class="nav-item nav-link" href="#">무늬사항</a>
+          <a class="nav-item nav-link" href="#">로그인</a>
+        </div>
+      </div>
+    </nav>
+    <div class="search-contain">
+      <div class="search-box col-sm-3">
+        <input
+          type="text"
+          id="search-a1"
+          class="form-control"
+          placeholder="검색어입력"
+        />
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <!-- <div class="card col-sm-3">
+          <img src="./Img/pr2.jpg" class="w-100" />
+          <div class="card-body">
+            <h5 class="card-title">원목 침대 프레임</h5>
+            <div class="card-brand">침대나라</div>
+            <div class="card-price">가격 : 20000</div>
+            <button class="btn btn-dark">담기</button>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <div class="container basket-wrap" style="background: #e2e2e2">
+      <h5>장바구니</h5>
+      <div class="row basket bg-dark">
+        <h5 style="color: aliceblue">여기로 드래그</h5>
+      </div>
+      <div>
+        <h5>최종가격</h5>
+        <div class="total">합계 <span>0</span></div>
+        <div>
+          <button type="button" id="buy" class="btn btn-dark">구매하기</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelector(".row").addEventListener("click", function (e) {
+          // 담기 버튼 클릭
+          if (e.target.classList.contains("btn")) {
+            const card = e.target.parentNode.parentNode;
+            const dataId = card.dataset.id;
+            addBasket(dataId);
+          }
+        });
+
+        // drag 이벤트
+        document.addEventListener("dragstart", (e) => {
+          if (e.target.classList.contains("card")) {
+            const card = e.target;
+            e.dataTransfer.setData("data-id", card.dataset.id);
+          }
+        });
+        const basket = document.querySelector(".basket");
+        basket.addEventListener("dragover", (e) => {
+          e.preventDefault();
+        });
+        basket.addEventListener("drop", (e) => {
+          e.preventDefault();
+          const dataId = e.dataTransfer.getData("data-id");
+          addBasket(dataId);
+        });
+      });
+
+      let globalData; // fetch해온 데이터.
+      let basketData = []; // 장바구니 데이터
+      // Data 로딩.
+      fetchData().then((data) => {
+        cardRender(data.products);
+      });
+
+      // 검색기능
+      const searchA1 = document.querySelector("#search-a1");
+      searchA1.addEventListener("keyup", (event) => {
+        const searchA1Value = searchA1.value.trim();
+        if (event.isComposing || event.keyCode === 229) return;
+        if (event.code == "Enter") {
+          fetchData().then((data) => {
+            // console.log(searchA1Value);
+            const newData = data.products.filter(
+              (element) =>
+                element.title.includes(searchA1Value) ||
+                element.brand.includes(searchA1Value)
+            );
+            const htmlData = newData.map((element) => {
+              element.title = element.title.replace(
+                searchA1Value,
+                `<span style="background : yellow">${searchA1Value}</span>`
+              );
+              element.brand = element.brand.replace(
+                searchA1Value,
+                `<span style="background : yellow">${searchA1Value}</span>`
+              );
+              return element;
+            });
+            // console.log(htmlData);
+            searchA1.value = searchA1Value;
+            cardRender(htmlData);
+          });
+        }
+      });
+
+      async function fetchData() {
+        try {
+          const response = await fetch("./Data/store.json");
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          globalData = await response.json();
+          return await globalData;
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+
+      function addBasket(dataId) {
+        const basket = document.querySelector(".basket");
+        const guideH5 = basket.querySelector("h5");
+        guideH5?.remove();
+
+        const hasItem = basketData.some((item) => item.id == dataId);
+        // console.log(hasItem);
+        if (!hasItem) {
+          // 없으면 추가
+          // console.log("없다" + hasItem);
+          const result = globalData.products.find(
+            (element) => element.id == dataId
+          );
+          basketData.push({ ...result, num: 1 });
+        } else {
+          // 존재하면 변경
+          // console.log("있다" + hasItem);
+          const result = basketData.find((element) => element.id == dataId);
+          result.num += 1;
+        }
+        // console.log(basketData);
+        basket.innerHTML = "";
+        basketData.forEach((element) => {
+          basket.innerHTML += /*html*/ `
+            <div class="card col-sm-3" data-id="${element.id}" draggable="true">
+              <img src="./Img/${element.photo}" class="w-100" draggable="false"/>
+              <div class="card-body">
+                <h5 class="card-title">${element.title}</h5>
+                <div class="card-brand">${element.brand}</div>
+                <div class="card-price">가격 : ${element.price}</div>
+                <input
+                  type="text"
+                  class="form-control" value="${element.num}"
+                />
+              </div>
+            </div>`;
+        });
+        let total = 0;
+        const labelTotal = document.querySelector(".total span");
+        basketData.forEach((element) => {
+          total += element.price * element.num;
+        });
+        labelTotal.textContent = total;
+
+        console.log(labelTotal);
+      }
+
+      const btnCommit = document.querySelector("#commit");
+      btnCommit.addEventListener("click", () => {
+        document.querySelector(".black-bg").classList.toggle("show-modal");
+        console.log("주문완료");
+        let total = 0;
+        let lineNum = 0;
+        let today = new Date();
+
+        const canvas = document.getElementById("canvas");
+        let c = canvas.getContext("2d");
+
+        // 스크롤 가능한 영역 생성
+        // canvasContainer.style.width = '400px'; // 스크롤 가능한 영역의 가로 크기
+        // canvasContainer.style.height = '200px'; // 스크롤 가능한 영역의 세로 크기
+        canvas.style.overflow = "auto";
+        c.clearRect(0, 0, canvas.width, canvas.height);
+        c.font = "bold 20px dotum";
+        c.clear;
+        c.fillText("영수증", 30, 20);
+        c.font = "12px dotum";
+        c.fillText(today.toLocaleString(), 30, 50 + lineNum++ * 20);
+        basketData.forEach((element) => {
+          c.fillText(element.title, 30, 50 + lineNum++ * 20);
+          c.fillText(element.brand, 30, 50 + lineNum++ * 20);
+          c.fillText(`가격 : ${element.price}`, 30, 50 + lineNum++ * 20);
+          c.fillText(`수량 : ${element.num}`, 30, 50 + lineNum++ * 20);
+          c.fillText(
+            `합계 : ${element.price * element.num}`,
+            30,
+            50 + lineNum++ * 20
+          );
+          // c.fillText("반갑습니다", 30, 50 + lineNum++ * 20);
+          total += element.price * element.num;
+          lineNum++;
+        });
+        c.fillText(`총 합계 : ${total}`, 30, 50 + lineNum++ * 20);
+        console.log("합계");
+        document.querySelector(".canvas-bg").classList.toggle("show-modal");
+      });
+      const comp = document.getElementById("comp");
+      comp.addEventListener("click", () => {
+        document.querySelector(".canvas-bg").classList.toggle("show-modal");
+      });
+
+      const btnBuy = document.querySelector("#buy");
+      btnBuy.addEventListener("click", () => {
+        //   $("#login").on("click", function () {
+        //   $(".black-bg").toggleClass("show-modal");
+        // });
+        // $("#close").on("click", function () {
+        //   $(".black-bg").toggleClass("show-modal");
+        // });
+        document.querySelector(".black-bg").classList.toggle("show-modal");
+      });
+      const btnClose = document.querySelector("#close");
+      btnClose.addEventListener("click", () => {
+        document.querySelector(".black-bg").classList.toggle("show-modal");
+      });
+
+      function cardRender(data) {
+        const row = document.querySelector(".row");
+        row.innerHTML = "";
+        data.forEach((element) => {
+          row.innerHTML += /*html*/ `
+            <div class="card col-sm-3" data-id="${element.id}" draggable="true">
+              <img src="./Img/${element.photo}" class="w-100" draggable="false"/>
+              <div class="card-body">
+                <h5 class="card-title">${element.title}</h5>
+                <div class="card-brand">${element.brand}</div>
+                <div class="card-price">가격 : ${element.price}</div>
+                <button id="btn-add" class="btn btn-dark">담기</button>
+              </div>
+            </div>`;
+        });
+      }
+
+      /**
+       * 동적요소의 이벤트 바인딩
+       */
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "products": [
+    {
+      "id": 0,
+      "title": "샤인머스켓",
+      "brand": "포도나라",
+      "photo": "샤인머스켓.jpg",
+      "price": 22000
+    },
+    {
+      "id": 1,
+      "title": "머루포도",
+      "brand": "포도나라",
+      "photo": "머루포도.jpg",
+      "price": 15000
+    },
+    {
+      "id": 2,
+      "title": "블랙사파이어",
+      "brand": "포도나라",
+      "photo": "블랙사파이어.jpg",
+      "price": 35000
+    },
+    {
+      "id": 3,
+      "title": "참기름",
+      "brand": "참깨나라",
+      "photo": "참기름.jpg",
+      "price": 50000
+    }
+  ]
+}
