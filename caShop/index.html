@@ -67,6 +67,13 @@
       <div class="row basket bg-dark">
         <h5 style="color: aliceblue">여기로 드래그</h5>
       </div>
+      <div>
+        <h5>최종가격</h5>
+        <div class="total">합계 <span>0</span></div>
+        <div>
+          <button type="button" id="buy" class="btn btn-dark">구매하기</button>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -186,6 +193,16 @@
               </div>
             </div>`;
         });
+        let total = 0;
+        const btnBuy = document.querySelector("#buy");
+        const labelTotal = document.querySelector(".total span");
+        basketData.forEach((element) => {
+          total += element.price * element.num;
+        });
+        labelTotal.textContent = total;
+
+        console.log(btnBuy);
+        console.log(labelTotal);
       }
 
       function cardRender(data) {
