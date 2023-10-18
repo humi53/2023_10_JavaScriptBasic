@@ -4,7 +4,7 @@
   padding: 0;
 }
 .search-contain {
-  margin: 5px 5px;
+  margin: 5px;
 }
 .container {
   border: solid 1px blue;
@@ -16,10 +16,19 @@
 
 .card {
   width: 200px;
-  margin: 6px 6px;
-  padding: 16px 16px;
+  margin: 6px;
+  padding: 16px;
 }
-/* .card img {
-  border: solid 1px blue;
-  padding: 10px 5px;
-} */
+
+.basket-wrap {
+  margin-top: 30px;
+  padding: 30px;
+}
+
+.basket {
+  min-height: 300px;
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+  margin: 0 auto;
+}
