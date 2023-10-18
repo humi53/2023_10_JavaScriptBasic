@@ -244,6 +244,11 @@
 
         const canvas = document.getElementById("canvas");
         let c = canvas.getContext("2d");
+
+        // 스크롤 가능한 영역 생성
+        // canvasContainer.style.width = '400px'; // 스크롤 가능한 영역의 가로 크기
+        // canvasContainer.style.height = '200px'; // 스크롤 가능한 영역의 세로 크기
+        canvas.style.overflow = "auto";
         c.clearRect(0, 0, canvas.width, canvas.height);
         c.font = "bold 20px dotum";
         c.clear;
