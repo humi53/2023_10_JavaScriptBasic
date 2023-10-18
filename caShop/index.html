@@ -18,6 +18,37 @@
     ></script>
   </head>
   <body class="bg-light">
+    <div class="black-bg">
+      <div class="white-bg">
+        <h4>주문하세요</h4>
+        <form action="success.html" id="logform">
+          <div>성함</div>
+          <div class="my-3">
+            <input type="text" class="form-control" id="username" />
+          </div>
+          <div>연락처</div>
+          <div class="my-3">
+            <input type="text" class="form-control" id="tel" />
+          </div>
+          <button type="button" class="btn btn-primary" id="commit">
+            입력완료
+          </button>
+          <button type="button" class="btn btn-danger" id="close">닫기</button>
+        </form>
+      </div>
+    </div>
+    <div class="canvas-bg">
+      <div class="white-bg">
+        <div>
+          <canvas id="canvas" width="350" height="350"></canvas>
+        </div>
+        <div>
+          <button type="button" class="btn btn-danger" id="comp">
+            주문완료
+          </button>
+        </div>
+      </div>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#">집꾸미기</a>
       <button
@@ -78,7 +109,7 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        document.addEventListener("click", function (e) {
+        document.querySelector(".row").addEventListener("click", function (e) {
           // 담기 버튼 클릭
           if (e.target.classList.contains("btn")) {
             const card = e.target.parentNode.parentNode;
@@ -194,16 +225,68 @@
             </div>`;
         });
         let total = 0;
-        const btnBuy = document.querySelector("#buy");
         const labelTotal = document.querySelector(".total span");
         basketData.forEach((element) => {
           total += element.price * element.num;
         });
         labelTotal.textContent = total;
 
-        console.log(btnBuy);
         console.log(labelTotal);
       }
+
+      const btnCommit = document.querySelector("#commit");
+      btnCommit.addEventListener("click", () => {
+        document.querySelector(".black-bg").classList.toggle("show-modal");
+        console.log("주문완료");
+        let total = 0;
+        let lineNum = 0;
+        let today = new Date();
+
+        const canvas = document.getElementById("canvas");
+        let c = canvas.getContext("2d");
+        c.clearRect(0, 0, canvas.width, canvas.height);
+        c.font = "bold 20px dotum";
+        c.clear;
+        c.fillText("영수증", 30, 20);
+        c.font = "12px dotum";
+        c.fillText(today.toLocaleString(), 30, 50 + lineNum++ * 20);
+        basketData.forEach((element) => {
+          c.fillText(element.title, 30, 50 + lineNum++ * 20);
+          c.fillText(element.brand, 30, 50 + lineNum++ * 20);
+          c.fillText(`가격 : ${element.price}`, 30, 50 + lineNum++ * 20);
+          c.fillText(`수량 : ${element.num}`, 30, 50 + lineNum++ * 20);
+          c.fillText(
+            `합계 : ${element.price * element.num}`,
+            30,
+            50 + lineNum++ * 20
+          );
+          // c.fillText("반갑습니다", 30, 50 + lineNum++ * 20);
+          total += element.price * element.num;
+          lineNum++;
+        });
+        c.fillText(`총 합계 : ${total}`, 30, 50 + lineNum++ * 20);
+        console.log("합계");
+        document.querySelector(".canvas-bg").classList.toggle("show-modal");
+      });
+      const comp = document.getElementById("comp");
+      comp.addEventListener("click", () => {
+        document.querySelector(".canvas-bg").classList.toggle("show-modal");
+      });
+
+      const btnBuy = document.querySelector("#buy");
+      btnBuy.addEventListener("click", () => {
+        //   $("#login").on("click", function () {
+        //   $(".black-bg").toggleClass("show-modal");
+        // });
+        // $("#close").on("click", function () {
+        //   $(".black-bg").toggleClass("show-modal");
+        // });
+        document.querySelector(".black-bg").classList.toggle("show-modal");
+      });
+      const btnClose = document.querySelector("#close");
+      btnClose.addEventListener("click", () => {
+        document.querySelector(".black-bg").classList.toggle("show-modal");
+      });
 
       function cardRender(data) {
         const row = document.querySelector(".row");
@@ -216,7 +299,7 @@
                 <h5 class="card-title">${element.title}</h5>
                 <div class="card-brand">${element.brand}</div>
                 <div class="card-price">가격 : ${element.price}</div>
-                <button class="btn btn-dark">담기</button>
+                <button id="btn-add" class="btn btn-dark">담기</button>
               </div>
             </div>`;
         });
